@@ -1,7 +1,6 @@
 import { Footer } from './components/layout/Footer';
 import { Header } from './components/layout/Header';
 import { AboutSection } from './components/sections/AboutSection';
-import { CategoriesSection } from './components/sections/CategoriesSection';
 import { CtaBannerSection } from './components/sections/CtaBannerSection';
 import { CustomizationSection } from './components/sections/CustomizationSection';
 import { FaqSection } from './components/sections/FaqSection';
@@ -17,7 +16,6 @@ export default function App() {
       <Header />
       <main>
         <HeroSection />
-        <CategoriesSection />
         <ProductsSection />
         <CustomizationSection />
         <HowToBuySection />

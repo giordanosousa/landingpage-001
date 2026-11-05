@@ -1,65 +1,56 @@
-import React from 'react';
-import { MapPin, Clock, ExternalLink, Store } from 'lucide-react';
+import { ArrowUpRight, MapPin } from 'lucide-react';
 import { BUSINESS_CONFIG } from '../../config/business.config';
 
-export const LocationSection: React.FC = () => {
+export const LocationSection = () => {
   return (
-    <section id="localizacao" className="py-20 bg-slate-900 text-white">
+    <section id="localizacao" className="py-16 md:py-24 bg-white text-neutral-900 font-sans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
           
           {/* Coluna de Informações (Esquerda) */}
-          <div className="lg:col-span-5 space-y-8">
-            <div className="space-y-3">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-500/20 text-rose-300 text-xs font-bold uppercase tracking-wider border border-rose-500/30">
-                <MapPin className="w-3.5 h-3.5" /> Venha nos Visitar
+          <div className="lg:col-span-5 space-y-6">
+            <div className="space-y-2">
+              <span className="text-[11px] font-bold uppercase tracking-widest text-neutral-500 block">
+                Venha nos Visitar
               </span>
-              <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-                Localização e Funcionamento
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-neutral-900 tracking-tight leading-tight">
+                Localização e<br />Funcionamento
               </h2>
-              <p className="text-slate-400 text-sm">
+              <p className="text-neutral-500 text-sm pt-1">
                 Estamos localizados no coração de Chapadinha - MA.
               </p>
             </div>
 
             {/* Card do Endereço */}
-            <div className="p-6 rounded-3xl bg-white/5 border border-white/10 space-y-4">
-              <div className="flex items-start gap-3">
-                <MapPin className="w-6 h-6 text-rose-400 shrink-0 mt-1" />
-                <div>
-                  <h4 className="font-bold text-base text-white">Endereço Confirmado</h4>
-                  <p className="text-sm text-slate-300 mt-1 leading-relaxed">
-                    {BUSINESS_CONFIG.fullAddress}
-                  </p>
-                </div>
+            <div className="p-6 rounded-3xl bg-neutral-100/80 border border-neutral-200/60 space-y-4">
+              <div>
+                <h4 className="font-bold text-sm text-neutral-900">Endereço Confirmado</h4>
+                <p className="text-xs sm:text-sm text-neutral-500 mt-1 leading-relaxed">
+                  {BUSINESS_CONFIG.fullAddress}
+                </p>
               </div>
 
-              <div className="pt-2">
-                <a
-                  href={BUSINESS_CONFIG.mapsUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 py-3 px-5 rounded-2xl bg-rose-600 hover:bg-rose-700 text-white font-bold text-xs shadow-md transition-all"
-                >
-                  <span>Como chegar pelo Google Maps</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
+              <a
+                href={BUSINESS_CONFIG.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full py-3.5 px-5 rounded-2xl bg-amber-400 hover:bg-amber-500 text-neutral-900 font-bold text-xs flex items-center justify-center gap-2 transition-colors shadow-xs group"
+              >
+                <span>Como chegar pelo Google Maps</span>
+                <ArrowUpRight className="w-4 h-4 text-neutral-900 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
             </div>
 
             {/* Card de Horários */}
-            <div className="p-6 rounded-3xl bg-white/5 border border-white/10 space-y-3">
-              <div className="flex items-center gap-2 text-amber-400 font-bold text-sm">
-                <Clock className="w-5 h-5" />
-                <span>Horários de Atendimento</span>
-              </div>
+            <div className="p-6 rounded-3xl bg-neutral-100/80 border border-neutral-200/60 space-y-4">
+              <h4 className="font-bold text-sm text-neutral-900">Horários de Atendimento</h4>
               
-              <div className="space-y-2 divide-y divide-white/5">
+              <div className="space-y-3">
                 {BUSINESS_CONFIG.hours.map((item, idx) => (
-                  <div key={idx} className="flex justify-between text-xs text-slate-300 pt-2 first:pt-0">
+                  <div key={idx} className="flex justify-between text-xs text-neutral-500">
                     <span>{item.days}</span>
-                    <span className="font-semibold text-white">{item.time}</span>
+                    <span className="font-bold text-neutral-900">{item.time}</span>
                   </div>
                 ))}
               </div>
@@ -69,50 +60,43 @@ export const LocationSection: React.FC = () => {
 
           {/* Coluna do Mapa Visual Simulado (Direita) */}
           <div className="lg:col-span-7">
-            <div className="relative rounded-3xl overflow-hidden border border-white/10 shadow-2xl bg-slate-800 h-96 sm:h-105 flex flex-col justify-between p-6">
-              
-              {/* Padrão de fundo do mapa */}
-              <div className="absolute inset-0 bg-[radial-gradient(#334155_1px,transparent_1px)] bg-size-[16px_16px] opacity-40"></div>
+            <div className="relative rounded-3xl overflow-hidden bg-neutral-900 min-h-[440px] sm:min-h-[480px] flex flex-col justify-between p-8 sm:p-10 text-white shadow-xl">
               
               {/* Header sobreposto no mapa */}
-              <div className="relative z-10 flex items-center justify-between bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-white/10">
-                <div className="flex items-center gap-3">
-                  <div className="p-2 rounded-xl bg-rose-500/20 text-rose-400">
-                    <Store className="w-5 h-5" />
-                  </div>
-                  <div>
-                    <p className="font-bold text-xs text-white">Astro Mixmax no Google Maps</p>
-                    <p className="text-[11px] text-slate-400">Chapadinha - Maranhão</p>
-                  </div>
+              <div className="space-y-3">
+                <div>
+                  <h3 className="font-bold text-base text-white">{BUSINESS_CONFIG.name} no Google Maps</h3>
+                  <p className="text-xs text-neutral-400">{BUSINESS_CONFIG.city} · Maranhão</p>
                 </div>
 
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 text-[11px] font-bold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span className="inline-block bg-amber-400 text-neutral-900 font-extrabold text-[11px] px-3 py-1 rounded-md">
                   Aberto para Consultas
                 </span>
               </div>
 
               {/* Marcador central */}
-              <div className="relative z-10 my-auto text-center space-y-4">
-                <div className="inline-flex p-4 rounded-full bg-rose-600/20 border border-rose-500/40 text-rose-500 animate-bounce">
-                  <MapPin className="w-10 h-10 fill-rose-500 text-slate-900" />
+              <div className="my-auto text-center space-y-2 py-8">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-amber-400 text-neutral-900 mb-1">
+                  <MapPin className="w-6 h-6 fill-neutral-900 text-amber-400" />
                 </div>
-                <div>
-                  <h3 className="text-lg font-extrabold text-white">Rua Prefeito Joaquim Almeida, 387-A</h3>
-                  <p className="text-xs text-slate-400">Centro • Chapadinha - MA</p>
-                </div>
+                <h3 className="text-base sm:text-lg font-bold text-white">
+                  Rua Prefeito Joaquim Almeida, 387-A
+                </h3>
+                <p className="text-xs text-neutral-400">
+                  Centro · Chapadinha - MA
+                </p>
               </div>
 
               {/* Botão de Ação do Mapa */}
-              <div className="relative z-10">
+              <div>
                 <a
                   href={BUSINESS_CONFIG.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full py-3 px-4 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold flex items-center justify-center gap-2 shadow-lg transition-colors"
+                  className="w-full py-4 px-6 rounded-2xl bg-amber-400 hover:bg-amber-500 text-neutral-900 text-xs font-bold flex items-center justify-center gap-2 transition-colors shadow-xs group"
                 >
                   <span>Abrir Perfil Oficial no Google Maps</span>
-                  <ExternalLink className="w-4 h-4" />
+                  <ArrowUpRight className="w-4 h-4 text-neutral-900 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </a>
               </div>
 

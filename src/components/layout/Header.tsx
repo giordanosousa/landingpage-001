@@ -1,82 +1,202 @@
 import React, { useState } from 'react';
-import { Sparkles, MessageCircle, Menu, X } from 'lucide-react';
-import { BUSINESS_CONFIG, createWhatsAppUrl } from '../../config/business.config';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { createWhatsAppUrl } from '../../config/business.config';
+import logo from '../../assets/logo-Astro-MixMax.png';
 
 export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const menuItems = [
+    { label: "Categorias", href: "#categorias" },
+    { label: "Produtos", href: "#produtos" },
+    { label: "Soluções", href: "#solucoes" },
+    { label: "Como Comprar", href: "#como-comprar" },
+    { label: "Sobre a Loja", href: "#sobre" },
+    { label: "Localização", href: "#localizacao" },
+  ];
+
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-rose-100 shadow-sm transition-all">
+    <header className="sticky top-0 z-50 bg-[#FFD504]/95 backdrop-blur-md border-b border-rose-100 shadow-sm transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <a href="#" className="flex items-center gap-3 group">
-            <div className="w-11 h-11 rounded-2xl bg-linear-to-tr from-rose-500 via-pink-500 to-purple-600 p-0.5 shadow-md shadow-rose-500/20 group-hover:scale-105 transition-transform">
-              <div className="w-full h-full bg-white rounded-[14px] flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-rose-500 fill-rose-100" />
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <span className="font-extrabold text-2xl tracking-tight bg-linear-to-r from-rose-600 via-pink-600 to-purple-700 bg-clip-text text-transparent">
-                {BUSINESS_CONFIG.name}
-              </span>
-              <span className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 -mt-1">
-                {BUSINESS_CONFIG.city} • Maranhão
-              </span>
+            <div>
+              <img src={logo}
+                  alt="Astro Mix Max"
+                  className="h-15 w-auto object-contain" />
             </div>
           </a>
 
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-            <a href="#categorias" className="hover:text-rose-600 transition-colors">Categorias</a>
-            <a href="#produtos" className="hover:text-rose-600 transition-colors">Destaques</a>
-            <a href="#personalizacao" className="hover:text-rose-600 transition-colors">Personalizados</a>
-            <a href="#como-comprar" className="hover:text-rose-600 transition-colors">Como Comprar</a>
-            <a href="#sobre" className="hover:text-rose-600 transition-colors">Sobre a Loja</a>
-            <a href="#localizacao" className="hover:text-rose-600 transition-colors">Localização</a>
+          <nav className="hidden md:flex items-center gap-8 text-sm">
+            {menuItems.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                className="
+                  relative
+                  text-[#171717]
+                  font-medium
+                  hover:text-[#555555]
+                  transition-colors
+                  duration-300
+
+                  after:content-['']
+                  after:absolute
+                  after:left-0
+                  after:-bottom-2
+                  after:w-0
+                  after:h-0.5
+                  after:bg-[#555555]
+                  after:transition-all
+                  after:duration-300
+
+                  hover:after:w-full
+                "
+              >
+                {item.label}
+              </a>
+            ))}
           </nav>
+
+          
 
           <div className="hidden md:flex items-center gap-3">
             <a
-              href={createWhatsAppUrl("Olá! Conheci a Astro Mixmax pelo site e gostaria de tirar uma dúvida.")}
+              href={createWhatsAppUrl(
+                "Olá! Conheci a Astro Mixmax pelo site e gostaria de tirar uma dúvida."
+              )}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white font-semibold text-sm shadow-md shadow-emerald-500/20 transition-all hover:scale-[1.02] active:scale-95"
-            >
-              <MessageCircle className="w-4 h-4 fill-white" />
-              <span>Atendimento WhatsApp</span>
+              className="
+                inline-flex
+                items-center
+                justify-center
+                gap-5
+                px-5
+                py-3
+                rounded-lg
+                bg-[#171717]
+                text-[#FFD504]
+                font-
+                text-sm
+                hover:bg-[#333333]
+                hover:-translate-y-0.5
+                transition-all
+                duration-300
+                shadow-sm
+                active:scale-95"
+              >
+              <span>Solicitar Orçamento</span>
+              <ArrowUpRight className="w-5 h-5" />
             </a>
           </div>
-
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Abrir menu de navegação"
-            className="md:hidden p-2 rounded-xl text-slate-600 hover:bg-rose-50 hover:text-rose-600 transition-colors focus:outline-none"
+            aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
+            className="
+              md:hidden
+              p-2
+              rounded-xl
+              text-[#171717]
+              hover:bg-black/10
+              hover:text-[#555555]
+              transition-colors
+              duration-300
+              focus-visible:outline-2
+              focus-visible:outline-offset-2
+              focus-visible:outline-[#171717]
+            "
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
-        </div>
-      </div>
-
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-white border-b border-rose-100 px-4 pt-2 pb-6 space-y-3">
-          <a href="#categorias" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-rose-50 hover:text-rose-600">Categorias</a>
-          <a href="#produtos" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-rose-50 hover:text-rose-600">Destaques</a>
-          <a href="#personalizacao" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-rose-50 hover:text-rose-600">Personalizados</a>
-          <a href="#como-comprar" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-rose-50 hover:text-rose-600">Como Comprar</a>
-          <a href="#sobre" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-rose-50 hover:text-rose-600">Sobre</a>
-          <a href="#localizacao" onClick={() => setMobileMenuOpen(false)} className="block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-rose-50 hover:text-rose-600">Localização</a>
-          <div className="pt-2">
-            <a
-              href={createWhatsAppUrl("Olá! Conheci a Astro Mixmax pelo site e gostaria de saber mais informações.")}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-emerald-500 text-white font-semibold text-sm shadow-md"
-            >
-              <MessageCircle className="w-5 h-5 fill-white" />
-              <span>Falar no WhatsApp</span>
-            </a>
           </div>
-        </div>
-      )}
+          </div>
+
+          {/* Menu de navegação mobile */}
+          {mobileMenuOpen && (
+            <div
+              id="mobile-navigation"
+              className="
+                md:hidden
+                bg-[#FFD504]
+                border-b
+                border-[#E6BF00]
+                px-4
+                pt-2
+                pb-6
+                space-y-3
+              "
+            >
+              {[
+                { label: "Categorias", href: "#categorias" },
+                { label: "Produtos", href: "#produtos" },
+                { label: "Soluções", href: "#solucoes" },
+                { label: "Como Comprar", href: "#como-comprar" },
+                { label: "Sobre a Loja", href: "#sobre" },
+                { label: "Localização", href: "#localizacao" },
+              ].map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="
+                    block
+                    px-3
+                    py-2
+                    rounded-lg
+                    text-base
+                    font-normal
+                    text-[#171717]
+                    hover:text-[#555555]
+                    hover:bg-black/10
+                    transition-colors
+                    duration-300
+                  "
+                >
+                  {item.label}
+                </a>
+              ))}
+
+              {/* Botão de orçamento */}
+              <div className="pt-3">
+                <a
+                  href={createWhatsAppUrl(
+                    "Olá! Conheci a Astro Mix Max pelo site e gostaria de solicitar um orçamento."
+                  )}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="
+                    w-full
+                    flex
+                    items-center
+                    justify-center
+                    gap-3
+                    px-5
+                    py-3
+                    rounded-lg
+                    bg-[#171717]
+                    text-[#FFD504]
+                    font-medium
+                    text-sm
+                    hover:bg-[#333333]
+                    transition-all
+                    duration-300
+                    active:scale-95
+                  "
+                >
+                  <span>Solicitar orçamento</span>
+                  <ArrowUpRight className="w-5 h-5" />
+                </a>
+              </div>
+            </div>
+          )}
+
     </header>
   );
 };

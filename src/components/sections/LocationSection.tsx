@@ -60,7 +60,7 @@ export const LocationSection = () => {
 
           {/* Coluna do Mapa Visual Simulado (Direita) */}
           <div className="lg:col-span-7">
-            <div className="relative rounded-3xl overflow-hidden bg-neutral-900 min-h-[440px] sm:min-h-[480px] flex flex-col justify-between p-8 sm:p-10 text-white shadow-xl">
+            <div className="relative rounded-3xl overflow-hidden bg-neutral-900 min-h-110 sm:min-h-120 flex flex-col justify-between p-8 sm:p-10 text-white shadow-xl">
               
               {/* Header sobreposto no mapa */}
               <div className="space-y-3">

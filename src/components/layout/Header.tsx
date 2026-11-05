@@ -7,7 +7,6 @@ export const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menuItems = [
-    { label: "Categorias", href: "#categorias" },
     { label: "Produtos", href: "#produtos" },
     { label: "Soluções", href: "#solucoes" },
     { label: "Como Comprar", href: "#como-comprar" },

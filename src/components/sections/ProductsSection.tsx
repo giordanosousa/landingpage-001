@@ -33,7 +33,7 @@ export const ProductsSection = () => {
   };
 
   return (
-    <section className="bg-neutral-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8 font-sans text-neutral-900">
+    <section id="produtos" className="bg-neutral-100 min-h-screen py-10 px-4 sm:px-6 lg:px-8 font-sans text-neutral-900">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
         {/* ----------------- PAINEL LATERAL ESQUERDO ----------------- */}
@@ -213,16 +213,25 @@ const Step02Personalization = () => (
       {PERSONALIZATION_OPTIONS.map((opt) => (
         <div
           key={opt.id}
-          className="bg-white rounded-2xl p-4 border border-neutral-200/80 flex items-center gap-4 shadow-xs"
+          className="bg-white rounded-3xl overflow-hidden border border-neutral-200/80 shadow-xs flex items-stretch min-h-30"
         >
-          <img
-            src={opt.image}
-            alt={opt.title}
-            className="w-24 h-24 rounded-xl object-cover bg-neutral-100 shrink-0"
-          />
-          <div className="space-y-1">
-            <h3 className="font-bold text-neutral-900 text-sm">{opt.title}</h3>
-            <p className="text-neutral-500 text-xs leading-relaxed">{opt.description}</p>
+          {/* Lado Esquerdo: A imagem preenche 100% da área, sem padding ou div cinza em volta */}
+          <div className="w-2/5 sm:w-1/3 shrink-0 relative">
+            <img
+              src={opt.image}
+              alt={opt.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+
+          {/* Lado Direito: Textos */}
+          <div className="w-3/5 sm:w-2/3 p-5 flex flex-col justify-center space-y-1.5">
+            <h3 className="font-extrabold text-neutral-900 text-sm sm:text-base leading-snug">
+              {opt.title}
+            </h3>
+            <p className="text-neutral-500 text-xs leading-relaxed">
+              {opt.description}
+            </p>
           </div>
         </div>
       ))}
@@ -234,14 +243,15 @@ const Step02Personalization = () => (
   </div>
 );
 
+
 /* --- PASSO 03: Processo de criação --- */
 const Step03Creation = () => (
-  <div className="space-y-6">
+  <div className="space-y-6 font-sans">
     <div>
       <span className="bg-amber-400 text-neutral-900 font-extrabold text-[11px] px-3 py-1 rounded-full inline-block">
         03 / 03
       </span>
-      <h2 className="text-3xl font-extrabold text-neutral-900 mt-3 tracking-tight">
+      <h2 className="text-3xl sm:text-4xl font-extrabold text-neutral-900 mt-3 tracking-tight">
         Toda grande ideia começa aqui.
       </h2>
       <p className="text-neutral-500 text-sm mt-1">
@@ -249,44 +259,64 @@ const Step03Creation = () => (
       </p>
     </div>
 
+    {/* Grelha de Cards com dimensões e espaçamentos fiéis ao protótipo */}
     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
       {CREATION_PROCESSES.map((proc) => (
-        <div key={proc.id} className="bg-white rounded-3xl p-6 border border-neutral-200/80 shadow-xs flex flex-col justify-between">
-          <div className="space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-amber-400 flex items-center justify-center text-neutral-900">
-              {proc.iconType === 'user' ? <User className="w-6 h-6" /> : <FileUp className="w-6 h-6" />}
+        <div
+          key={proc.id}
+          className="bg-white rounded-3xl p-8 sm:p-16 border border-neutral-200/80 shadow-xs flex flex-col justify-between min-h-87.5"
+        >
+          {/* Conteúdo Superior: Ícone Amarelo, Tag, Título e Descrição */}
+          <div className="space-y-5">
+            <div className="w-14 h-14 rounded-2xl bg-amber-400 flex items-center justify-center text-neutral-900">
+              {proc.iconType === 'user' ? (
+                <User className="w-7 h-7 stroke-[2.2]" />
+              ) : (
+                <FileUp className="w-7 h-7 stroke-[2.2]" />
+              )}
             </div>
-            <div>
-              <span className="text-xs font-medium text-neutral-400">{proc.tag}</span>
-              <h3 className="text-xl font-bold text-neutral-900 mt-1">{proc.title}</h3>
+
+            <div className="space-y-1.5 pt-1">
+              <span className="text-[11px] font-semibold text-neutral-400 block">
+                {proc.tag}
+              </span>
+              <h3 className="text-2xl font-extrabold text-neutral-900 tracking-tight leading-snug">
+                {proc.title}
+              </h3>
             </div>
-            <p className="text-neutral-500 text-xs leading-relaxed">{proc.description}</p>
+
+            <p className="text-neutral-500 text-xs sm:text-sm leading-relaxed">
+              {proc.description}
+            </p>
           </div>
 
-          <a
-            href={createWhatsAppUrl(`Olá! ${proc.actionText}`)}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-6 flex items-center justify-between text-xs font-bold text-neutral-900 hover:text-amber-600 transition-colors group"
-          >
-            <span>{proc.actionText}</span>
-            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
+          {/* Rodapé: Link de Ação com Seta no Canto Direito */}
+          <div className="pt-6">
+            <a
+              href={createWhatsAppUrl(`Olá! ${proc.actionText}`)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-between text-xs sm:text-sm font-bold text-neutral-900 hover:text-amber-600 transition-colors group"
+            >
+              <span>{proc.actionText}</span>
+              <ArrowUpRight className="w-4 h-4 text-neutral-900 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+            </a>
+          </div>
         </div>
       ))}
     </div>
 
-    {/* Banner Inferior de Etapas */}
-    <div className="bg-neutral-900 rounded-2xl p-6 text-white flex flex-col md:flex-row md:items-center justify-between gap-4">
+    {/* Banner Escuro Inferior (Linha do Tempo de Etapas) */}
+    <div className="bg-neutral-900 rounded-3xl p-6 sm:p-8 text-white flex flex-col md:flex-row md:items-center justify-between gap-4 mt-8">
       <div>
-        <h4 className="font-bold text-sm">Você acompanha cada etapa.</h4>
+        <h4 className="font-bold text-sm sm:text-base text-white">Você acompanha cada etapa.</h4>
         <p className="text-xs text-neutral-400 mt-1">Antes de produzir, alinhamos cada detalhe com você.</p>
       </div>
-      <div className="flex items-center gap-2 text-xs font-semibold text-amber-400">
+      <div className="flex items-center gap-2 text-xs font-bold text-amber-400">
         <span>Briefing</span>
-        <span>&rarr;</span>
+        <span className="text-neutral-500">&rarr;</span>
         <span>Arte</span>
-        <span>&rarr;</span>
+        <span className="text-neutral-500">&rarr;</span>
         <span>Aprovação</span>
       </div>
     </div>
@@ -297,9 +327,10 @@ const Step03Creation = () => (
   </div>
 );
 
+
 /* --- SEÇÃO EXTRA: Kits e Combinações --- */
 const StepKits = () => (
-  <div className="space-y-6">
+  <div className="space-y-6 font-sans">
     <div>
       <span className="bg-amber-400 text-neutral-900 font-extrabold text-[11px] px-3 py-1 rounded-full inline-block">
         KITS E PRESENTES
@@ -316,33 +347,45 @@ const StepKits = () => (
       {COMBO_KITS.map((kit) => (
         <div
           key={kit.id}
-          className="bg-white rounded-2xl overflow-hidden border border-neutral-200/80 shadow-xs flex flex-col justify-between"
+          className="bg-white rounded-3xl overflow-hidden border border-neutral-200/80 shadow-xs flex items-stretch min-h-60"
         >
-          <div className="flex p-4 gap-4">
+          {/* Lado Esquerdo: A imagem preenche 100% da área da esquerda */}
+          <div className="w-2/5 sm:w-5/12 shrink-0 relative">
             <img
               src={kit.image}
               alt={kit.title}
-              className="w-28 h-28 rounded-xl object-cover bg-neutral-100 shrink-0"
+              className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="space-y-1">
-              <h3 className="font-bold text-neutral-900 text-base">{kit.title}</h3>
-              <p className="text-[11px] font-semibold text-neutral-700 bg-neutral-100 px-2 py-0.5 rounded inline-block">
-                {kit.items}
-              </p>
-              <p className="text-neutral-500 text-xs leading-relaxed pt-1">{kit.description}</p>
-            </div>
           </div>
 
-          <div className="px-4 pb-4">
-            <a
-              href={createWhatsAppUrl(`Olá! Gostaria de consultar sobre o kit "${kit.title}".`)}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs font-bold text-neutral-900 hover:text-amber-600 transition-colors group"
-            >
-              <span>Criar meu kit</span>
-              <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+          {/* Lado Direito: Informações do Kit e Botão de Ação */}
+          <div className="w-3/5 sm:w-7/12 p-6 flex flex-col justify-between space-y-4">
+            <div className="space-y-2">
+              <h3 className="font-extrabold text-neutral-900 text-base leading-snug">
+                {kit.title}
+              </h3>
+              
+              {/* Itens em texto em negrito sem badge/fundo */}
+              <p className="text-xs font-bold text-neutral-900">
+                {kit.items}
+              </p>
+
+              <p className="text-neutral-500 text-xs leading-relaxed pt-0.5">
+                {kit.description}
+              </p>
+            </div>
+
+            <div>
+              <a
+                href={createWhatsAppUrl(`Olá! Gostaria de consultar sobre o kit "${kit.title}".`)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-bold text-neutral-900 hover:text-amber-600 transition-colors group"
+              >
+                <span>Criar meu kit</span>
+                <ArrowUpRight className="w-3.5 h-3.5 text-neutral-900 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+            </div>
           </div>
         </div>
       ))}
@@ -356,7 +399,7 @@ const StepKits = () => (
       className="bg-amber-400 hover:bg-amber-500 transition-colors rounded-2xl p-4 flex items-center justify-between text-neutral-900 font-bold text-xs shadow-xs group"
     >
       <span>Uma ocasião especial? Vamos montar uma combinação só sua.</span>
-      <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+      <ArrowUpRight className="w-4 h-4 text-neutral-900 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
     </a>
   </div>
 );

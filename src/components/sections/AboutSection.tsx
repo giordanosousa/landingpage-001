@@ -11,7 +11,7 @@ export const AboutSection = () => {
           <div className="lg:col-span-5 space-y-3">
             <div className="aspect-4/3 sm:aspect-square rounded-3xl overflow-hidden bg-neutral-200">
               <img
-                src="https://images.unsplash.com/photo-1528698827591-e19ccd7bc23d?auto=format&fit=crop&q=80&w=800"
+                src="https://res.cloudinary.com/kqdlvfur/image/upload/v1793895757/487604012_18048861422357511_2300602303333583117_n.jpg"
                 alt="Astro Mixmax Loja em Chapadinha"
                 className="w-full h-full object-cover"
               />
